@@ -44,6 +44,12 @@ export default function RootLayout({
           gtag('config', 'G-53KHKC4DTM');
         `}
       </Script>
+     
+      <script>
+        gtag('event', 'conversion_event_purchase', {
+          // <event_parameters>
+        });
+      </script>
 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
