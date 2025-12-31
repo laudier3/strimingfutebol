@@ -14,6 +14,7 @@ export default function LandingPage() {
   const [openModal, setOpenModal] = useState(false)
   const [showPix, setShowPix] = useState(false)
   const [email, setEmail] = useState('')
+  const [error, setError] = useState<string | null>(null);
 
   return (
     <main className="min-h-screen bg-neutral-950 text-neutral-50">
@@ -142,15 +143,21 @@ export default function LandingPage() {
             <button
               onClick={() => {
                 if (!email.trim()) {
-                  alert('Informe um e-mail válido')
-                  return
+                  setError("Por favor, informe um e-mail válido para continuar.");
+                  return;
                 }
-                setShowPix(true)
+                setError(null);
+                setShowPix(true);
               }}
               className="w-full rounded-xl bg-green-600 py-3 font-semibold hover:bg-green-700"
             >
               Pagar com PIX
             </button>
+            {error && (
+            <p className="mt-2 text-sm text-red-500">
+                {error}
+              </p>
+            )}
           </div>
 
           {/* CARTÃO */}
