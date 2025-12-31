@@ -57,7 +57,7 @@ export default function LandingPage() {
           >
            
                 
-                   <YouTubePlayer url="https://youtu.be/3UzBEPJZMZg?t=676" />
+                   <YouTubePlayer url="https://youtu.be/7PolwI7sxp8?t=6" />
                 
               
           </motion.div>

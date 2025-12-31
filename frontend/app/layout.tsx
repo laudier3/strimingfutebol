@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,9 +17,9 @@ export const metadata: Metadata = {
   title: "Futebol ao Vivo",
   description: "Assista futebol ao vivo online",
   icons: {
-    icon: "/favicon.ico",        // ícone padrão
-    shortcut: "/favicon.ico",    // atalho
-    apple: "/apple-icon.png",    // iOS (opcional)
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
   },
 };
 
@@ -29,6 +30,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-53KHKC4DTM"
+        strategy="afterInteractive"
+      />
+
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-53KHKC4DTM');
+        `}
+      </Script>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
