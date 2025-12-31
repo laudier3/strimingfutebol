@@ -8,7 +8,6 @@ import { Shield, Tv, Zap, Star } from 'lucide-react'
 import { PaymentModal } from '../app/components/PaymentModal'
 import { PixPayment } from '../app/components/PaymentButtonPix'
 import { PaymentButton } from '../app/components/PaymentButton'
-import YouTubePlayer from './components/Videos'
 
 export default function LandingPage() {
   const [openModal, setOpenModal] = useState(false)
@@ -54,11 +53,20 @@ export default function LandingPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
           >
-           
-                
-                   <YouTubePlayer url="https://youtu.be/3UzBEPJZMZg?t=676" />
-                
-              
+            <Card className="bg-neutral-900/80 border-neutral-800 shadow-2xl overflow-hidden">
+              <CardContent className="p-0">
+                <div className="aspect-video rounded-xl overflow-hidden">
+                  <video
+                    src="/demo.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </section>
