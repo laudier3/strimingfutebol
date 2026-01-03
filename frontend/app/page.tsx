@@ -35,20 +35,39 @@ export default function LandingPage() {
               Assista aos principais campeonatos com qualidade Full HD, suporte profissional e acesso imediato.
             </p>
 
-            <div className="mt-8 flex gap-4">
-              <Button size="lg" className="text-lg px-8 py-6">
-                Testar agora
-              </Button>
+           <div className="mt-8 flex gap-4">
+            {/* Botão principal com gradiente verde escuro */}
+            <Button
+              size="lg"
+              className="
+                text-lg px-8 py-6 
+                bg-gradient-to-r from-green-800 to-green-600 
+                text-white rounded-lg 
+                shadow-lg 
+                hover:from-green-700 hover:to-green-500 
+                hover:scale-105 hover:shadow-xl 
+                transition transform duration-300
+              "
+              onClick={() => window.open('https://exemplo.com/testar', '_blank')} // opcional
+            >
+              Testar agora
+            </Button>
 
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-lg px-8 py-6 text-black"
-                onClick={() => setOpenModal(true)}
-              >
-                Ver planos
-              </Button>
-            </div>
+            {/* Botão outline com efeito hover verde */}
+            <Button
+              size="lg"
+              variant="outline"
+              className="
+                text-black px-8 py-6 rounded-lg border-2 border-green-800 
+                hover:bg-gradient-to-r hover:from-green-800 hover:to-green-600 
+                hover:text-white hover:scale-105 hover:shadow-lg 
+                transition transform duration-300
+              "
+              onClick={() => setOpenModal(true)}
+            >
+              Ver planos
+            </Button>
+          </div>
           </motion.div>
 
           <motion.div
@@ -75,7 +94,7 @@ export default function LandingPage() {
       <section className="py-24">
         {/* PROVAS DE CONFIANÇA */}
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
             Por que escolher nossa plataforma?
           </h2>
 
@@ -100,7 +119,7 @@ export default function LandingPage() {
               <Card key={b.title} className="bg-neutral-900 border-neutral-800">
                 <CardContent className="p-6">
                   {b.icon}
-                  <h3 className="mt-4 text-xl font-semibold">{b.title}</h3>
+                  <h3 className="mt-4 text-xl font-semibold text-white">{b.title}</h3>
                   <p className="mt-2 text-neutral-400">{b.desc}</p>
                 </CardContent>
               </Card>
@@ -180,7 +199,21 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold">Comece a assistir hoje mesmo</h2>
           <p className="mt-4 text-neutral-300">Ativação imediata após o pagamento.</p>
-          <Button onClick={() => setOpenModal(true)} size="lg" className="mt-8 px-10 py-6 text-lg">Quero acesso agora</Button>
+          <Button
+            onClick={() => setOpenModal(true)}
+            size="lg"
+            className="
+              mt-8 px-10 py-6 text-lg 
+              bg-gradient-to-r from-green-800 to-green-600 
+              text-white rounded-lg 
+              shadow-lg 
+              hover:from-green-700 hover:to-green-500 
+              hover:scale-105 hover:shadow-xl 
+              transition transform duration-300
+            "
+          >
+            Quero acesso agora
+          </Button>
         </div>
       </section>
 
