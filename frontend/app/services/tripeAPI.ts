@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://futebol.urlcurt.site', //"http://localhost:3333", //'https://futebol.urlcurt.site',
+  baseURL: 'https://fut.urlcurt.site', //"http://localhost:3333", //'https://fut.urlcurt.site',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -17,7 +17,7 @@ const api = axios.create({
 }*/
 
 export async function createCheckout(email: string) {
-  const response = await axios.post(`https://futebol.urlcurt.site/create-checkout-session`, {
+  const response = await axios.post(`https://fut.urlcurt.site/create-checkout-session`, {
     email,
   });
   console.log('E-mail enviado para pagamento:', email);
