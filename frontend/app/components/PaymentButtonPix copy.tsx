@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { api } from '../services/tripeAPI'
-import { gtag } from '../../lib/gtag'
+
 interface PixPaymentProps {
   email: string
 }
@@ -17,10 +17,7 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
   const [copied, setCopied] = useState(false)
   const [paid, setPaid] = useState(false)
 
-  // 🔒 evita conversão duplicada
-  const conversionSent = useRef(false)
-
-  // 🔥 GERA PIX
+  // 🔥 GERA PIX AUTOMATICAMENTE
   useEffect(() => {
     if (!email) return
 
@@ -32,7 +29,7 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
         })
 
         setPixData(response.data)
-      } catch {
+      } catch (err: any) {
         setError('Erro ao gerar pagamento Pix')
       } finally {
         setLoading(false)
@@ -48,31 +45,13 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
 
     const interval = setInterval(async () => {
       try {
-        const res = await api.get(
-          `/payment-status?email=${encodeURIComponent(email)}`
-        )
-
-        if (res.data?.paid && !conversionSent.current) {
-          conversionSent.current = true
+        const res = await api.get(`/payment-status?email=${encodeURIComponent(email)}`)
+        if (res.data?.paid) {
           setPaid(true)
           clearInterval(interval)
-
-          // ✅ CONVERSÃO GOOGLE ADS (SEM ERRO TS)
-          gtag('event', 'conversion', {
-            send_to: 'AW-16702751399/6Yw8CNb90-AbEKeFv5w-',
-            transaction_id: `PIX_${email}_${Date.now()}`,
-            value: 20,
-            currency: 'BRL',
-          })
-
-          // ⏳ garante envio antes do redirect
-          setTimeout(() => {
-            window.location.href = 'https://apk.futemais.net/app2/'
-          }, 800)
+          window.location.href = 'https://apk.futemais.net/app2/'
         }
-      } catch {
-        // erro silencioso
-      }
+      } catch {}
     }, 5000)
 
     return () => clearInterval(interval)
@@ -100,7 +79,6 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
       <img
         src={`data:image/png;base64,${pixData?.qr_code_base64}`}
         className="mx-auto mb-4 max-w-[260px]"
-        alt="QR Code Pix"
       />
 
       <button
