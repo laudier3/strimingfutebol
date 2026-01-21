@@ -30,42 +30,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* Google Analytics */}
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-53KHKC4DTM"
-        strategy="afterInteractive"
-      />
-
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-53KHKC4DTM');
-        `}
-      </Script>
-     
-      <script>
-        gtag('event', 'conversion_event_purchase', {
-          // <event_parameters>
-        });
-      </script>
-
-      {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-8Q0HC12NVS"
-          strategy="afterInteractive"
-        />
-
-        <Script id="ga4" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-8Q0HC12NVS');
-          `}
-        </Script>
-
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
