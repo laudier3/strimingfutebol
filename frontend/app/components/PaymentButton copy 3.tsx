@@ -22,7 +22,7 @@ export const PaymentButton = ({ email }: PaymentButtonProps) => {
     const checkPayment = async () => {
       try {
         const res = await fetch(
-          `https://fut.urlcurt.site/payment-status?email=${email}`
+          `https://SEU_BACKEND_URL/payment-status?email=${email}`
         )
         const data = await res.json()
 
