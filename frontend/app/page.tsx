@@ -48,7 +48,7 @@ export default function LandingPage() {
                 hover:scale-105 hover:shadow-xl 
                 transition transform duration-300
               "
-              onClick={() => window.open('https://exemplo.com/testar', '_blank')} // opcional
+              onClick={() => setOpenModal(true)} // opcional
             >
               Testar agora
             </Button>
@@ -141,16 +141,48 @@ export default function LandingPage() {
         </h2>
 
         {/* EMAIL */}
-        <div className="max-w-md mx-auto mb-8">
-          <input
-            type="email"
-            placeholder="Digite seu melhor e-mail"
-            className="w-full rounded-xl bg-neutral-950 border border-neutral-800 px-4 py-4 text-lg focus:outline-none focus:border-green-500"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+       <div className="max-w-md mx-auto mb-10 bg-neutral-900 border border-green-600/40 rounded-2xl p-6 shadow-lg shadow-green-900/20">
+
+  <h3 className="text-xl font-bold text-white mb-2">
+    🚀 Libere seu acesso agora
+  </h3>
+
+  <p className="text-sm text-neutral-400 mb-4">
+    Informe seu e-mail para continuar para o pagamento seguro.
+  </p>
+
+  <label 
+    htmlFor="email" 
+    className="block mb-2 text-sm font-semibold text-green-400"
+  >
+    Seu melhor e-mail
+  </label>
+
+  <input
+    id="email"
+    type="email"
+    placeholder="exemplo@seuemail.com"
+    className={`w-full rounded-xl bg-black border px-4 py-4 text-lg focus:outline-none transition-all
+      ${error 
+        ? 'border-red-500 focus:border-red-500' 
+        : 'border-green-500 focus:border-green-400'
+      }`}
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    required
+  />
+
+  <p className="mt-3 text-xs text-neutral-500">
+    🔒 Seu e-mail está 100% seguro. Não enviamos spam.
+  </p>
+
+  {error && (
+    <p className="mt-3 text-sm text-red-500 font-medium">
+      {error}
+    </p>
+  )}
+</div>
+
 
         {/* PLANO */}
         <div className="grid md:grid-cols-2 gap-6">

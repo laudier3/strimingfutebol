@@ -8,19 +8,10 @@ interface PaymentButtonProps {
 
 export const PaymentButton = ({ email }: PaymentButtonProps) => {
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  const isValidEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
-  }
 
   const handlePayment = async () => {
-    setError(null)
-
-    // ✅ Validação correta
-    if (!email || !isValidEmail(email)) {
-      setError("Por favor, informe um e-mail válido para continuar.")
+    if (!email || !email.includes('@')) {
+      alert('Email inválido')
       return
     }
 
@@ -33,7 +24,7 @@ export const PaymentButton = ({ email }: PaymentButtonProps) => {
         throw new Error('checkoutUrl não retornado')
       }
 
-      // ✅ Evento Google Ads
+      // ✅ DISPARA EVENTO GOOGLE ADS (INÍCIO DE CHECKOUT / COMPRA)
       gtag('event', 'conversion', {
         send_to: 'AW-16702751399/6Yw8CNb90-AbEKeFv5w-',
         transaction_id: `CARD_${email}_${Date.now()}`,
@@ -41,32 +32,25 @@ export const PaymentButton = ({ email }: PaymentButtonProps) => {
         currency: 'BRL',
       })
 
+      // ⏳ delay para garantir envio antes do redirect
       setTimeout(() => {
         window.location.href = data.checkoutUrl
       }, 800)
 
     } catch (err) {
       console.error('❌ Erro cartão:', err)
-      setError('Erro ao iniciar pagamento com cartão.')
+      alert('Erro ao iniciar pagamento com cartão')
       setLoading(false)
     }
   }
 
   return (
-    <div className="w-full">
-      <button
-        onClick={handlePayment}
-        disabled={loading}
-        className="w-full rounded-xl bg-blue-600 py-3 font-semibold hover:bg-blue-700 disabled:opacity-50"
-      >
-        {loading ? 'Processando...' : 'Pagar com Cartão'}
-      </button>
-
-      {error && (
-        <p className="mt-2 text-sm text-red-500">
-          {error}
-        </p>
-      )}
-    </div>
+    <button
+      onClick={handlePayment}
+      disabled={loading || !email.trim()}
+      className="w-full rounded-xl bg-blue-600 py-3 font-semibold hover:bg-blue-700 disabled:opacity-50"
+    >
+      {loading ? 'Redirecionando...' : 'Pagar com Cartão'}
+    </button>
   )
 }
