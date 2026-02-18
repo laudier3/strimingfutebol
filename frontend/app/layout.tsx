@@ -23,7 +23,6 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Futebol ao Vivo - Assista sem travar",
   description: "Assista futebol ao vivo online com qualidade HD e acesso imediato.",
-
   openGraph: {
     title: "Futebol ao Vivo - Assista sem travar",
     description: "Transmissão rápida, segura e em Full HD. Acesse agora.",
@@ -40,18 +39,11 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     type: "website",
   },
-
   twitter: {
     card: "summary_large_image",
     title: "Futebol ao Vivo - Assista sem travar",
     description: "Transmissão esportiva oficial em Full HD.",
     images: ["https://www.futebollaovivo.online/og-image.jpg"],
-  },
-
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
   },
 };
 
