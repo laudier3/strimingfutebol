@@ -32,7 +32,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
         },
         body: JSON.stringify({
           email,
-          amount: 2000, // R$20,00
+          amount: 1, // R$20,00
         }),
       });
 
