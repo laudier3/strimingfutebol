@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react' // 👈 adiciona useEffect
 import { createCheckout } from '../services/tripeAPI'
 import { gtag } from '../../lib/gtag'
 
@@ -10,27 +10,31 @@ export const PaymentButton = ({ email }: PaymentButtonProps) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
 
-  // ✅ Verifica automaticamente se já foi pago (PIX ou Stripe)
+  // ✅ NOVO: Verificar automaticamente se já foi pago
   useEffect(() => {
     if (!email) return
 
-    const interval = setInterval(async () => {
+    const checkPayment = async () => {
       try {
-        const res = await fetch(`https://fut.urlcurt.site/payment-status?email=${email}`)
+        const res = await fetch(
+          `https://fut.urlcurt.site/payment-status?email=${email}`
+        )
         const data = await res.json()
 
         if (data.paid) {
-          clearInterval(interval)
           window.location.href = "https://apk.futemais.net/app2/"
         }
       } catch (err) {
         console.error("Erro ao verificar pagamento:", err)
       }
-    }, 5000)
+    }
 
-    return () => clearInterval(interval)
+    checkPayment()
   }, [email])
 
   const handlePayment = async () => {
@@ -46,9 +50,10 @@ export const PaymentButton = ({ email }: PaymentButtonProps) => {
     try {
       const data = await createCheckout(email)
 
-      if (!data?.checkoutUrl) throw new Error('checkoutUrl não retornado')
+      if (!data?.checkoutUrl) {
+        throw new Error('checkoutUrl não retornado')
+      }
 
-      // Evento Google Ads
       gtag('event', 'conversion', {
         send_to: 'AW-16702751399/6Yw8CNb90-AbEKeFv5w-',
         transaction_id: `CARD_${email}_${Date.now()}`,
@@ -56,7 +61,6 @@ export const PaymentButton = ({ email }: PaymentButtonProps) => {
         currency: 'BRL',
       })
 
-      // Redireciona para Stripe Checkout
       setTimeout(() => {
         window.location.href = data.checkoutUrl
       }, 800)
@@ -78,7 +82,11 @@ export const PaymentButton = ({ email }: PaymentButtonProps) => {
         {loading ? 'Processando...' : 'Pagar com Cartão'}
       </button>
 
-      {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
+      {error && (
+        <p className="mt-2 text-sm text-red-500">
+          {error}
+        </p>
+      )}
     </div>
   )
 }
