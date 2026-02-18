@@ -1,3 +1,4 @@
+import "./globals.css";
 import { HeadMeta } from './components/HeadMeta'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
