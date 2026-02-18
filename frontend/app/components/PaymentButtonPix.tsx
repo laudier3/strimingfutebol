@@ -94,56 +94,48 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
   }
 
   return (
-  <div className="max-w-md mx-auto text-center bg-neutral-900 border border-green-600/40 rounded-2xl p-6 shadow-lg shadow-green-900/20">
+    <div className="fixed inset-0 z-50 bg-neutral-950 flex items-center justify-center px-4">
 
-    <h3 className="text-2xl font-bold text-white mb-2">
-      💰 Finalize com PIX
-    </h3>
+      <div className="w-full max-w-md text-center bg-neutral-900 border border-green-600/40 rounded-2xl p-6 shadow-lg shadow-green-900/20">
 
-    <p className="text-sm text-neutral-400 mb-4">
-      Escaneie o QR Code abaixo para liberar seu acesso imediatamente.
-    </p>
+        <h3 className="text-2xl font-bold text-white mb-2">
+          💰 Finalize com PIX
+        </h3>
 
-    <img
-      src={`data:image/png;base64,${pixData?.qr_code_base64}`}
-      alt="QR Code Pix"
-      className="
-        mx-auto
-        mb-4
-        w-full
-        max-w-[280px]
-        sm:max-w-[300px]
-        aspect-square
-        object-contain
-        rounded-lg
-        border border-green-500/30
-      "
-    />
-
-    <button
-      onClick={copyToClipboard}
-      className="w-full mt-2 rounded-xl bg-green-600 hover:bg-green-700 py-3 font-semibold transition"
-    >
-      {copied ? '✅ Código copiado!' : 'Copiar código Pix'}
-    </button>
-
-    <div className="mt-6 text-sm">
-      {paid ? (
-        <p className="text-green-400 font-semibold">
-          ✅ Pagamento aprovado! Redirecionando...
+        <p className="text-sm text-neutral-400 mb-4">
+          Escaneie o QR Code abaixo para liberar seu acesso imediatamente.
         </p>
-      ) : (
-        <p className="text-yellow-400 animate-pulse">
-          ⏳ Aguardando confirmação do pagamento...
+
+        <img
+          src={`data:image/png;base64,${pixData?.qr_code_base64}`}
+          alt="QR Code Pix"
+          className="mx-auto mb-4 w-full max-w-[300px] aspect-square object-contain rounded-lg border border-green-500/30"
+        />
+
+        <button
+          onClick={copyToClipboard}
+          className="w-full mt-2 rounded-xl bg-green-600 hover:bg-green-700 py-3 font-semibold transition"
+        >
+          {copied ? '✅ Código copiado!' : 'Copiar código Pix'}
+        </button>
+
+        <div className="mt-6 text-sm">
+          {paid ? (
+            <p className="text-green-400 font-semibold">
+              ✅ Pagamento aprovado! Redirecionando...
+            </p>
+          ) : (
+            <p className="text-yellow-400 animate-pulse">
+              ⏳ Aguardando confirmação do pagamento...
+            </p>
+          )}
+        </div>
+
+        <p className="mt-4 text-xs text-neutral-500">
+          🔒 Pagamento 100% seguro via PIX
         </p>
-      )}
+
+      </div>
     </div>
-
-    <p className="mt-4 text-xs text-neutral-500">
-      🔒 Pagamento 100% seguro via PIX
-    </p>
-
-  </div>
-)
-
+  )
 }
