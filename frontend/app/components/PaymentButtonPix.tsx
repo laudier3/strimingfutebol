@@ -61,7 +61,7 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
           gtag('event', 'conversion', {
             send_to: 'AW-16702751399/6Yw8CNb90-AbEKeFv5w-',
             transaction_id: `PIX_${email}_${Date.now()}`,
-            value: 2,
+            value: 2000,
             currency: 'BRL',
           })
 
