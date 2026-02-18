@@ -57,7 +57,7 @@ export const PaymentButton = ({ email }: PaymentButtonProps) => {
       gtag('event', 'conversion', {
         send_to: 'AW-16702751399/6Yw8CNb90-AbEKeFv5w-',
         transaction_id: `CARD_${email}_${Date.now()}`,
-        value: 20,
+        value: 2,
         currency: 'BRL',
       })
 

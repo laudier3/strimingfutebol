@@ -61,7 +61,7 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
           gtag('event', 'conversion', {
             send_to: 'AW-16702751399/6Yw8CNb90-AbEKeFv5w-',
             transaction_id: `PIX_${email}_${Date.now()}`,
-            value: 20,
+            value: 2,
             currency: 'BRL',
           })
 
@@ -106,8 +106,18 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
 
     <img
       src={`data:image/png;base64,${pixData?.qr_code_base64}`}
-      className="mx-auto mb-4 max-w-[260px] rounded-lg border border-green-500/30"
       alt="QR Code Pix"
+      className="
+        mx-auto
+        mb-4
+        w-full
+        max-w-[280px]
+        sm:max-w-[300px]
+        aspect-square
+        object-contain
+        rounded-lg
+        border border-green-500/30
+      "
     />
 
     <button
