@@ -28,7 +28,7 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
       try {
         const response = await api.post('/create-pix-payment', {
           email,
-          amount: 2000,
+          amount: 1,
         })
 
         setPixData(response.data)
@@ -61,7 +61,7 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
           gtag('event', 'conversion', {
             send_to: 'AW-16702751399/6Yw8CNb90-AbEKeFv5w-',
             transaction_id: `PIX_${email}_${Date.now()}`,
-            value: 2000,
+            value: 1,
             currency: 'BRL',
           })
 
