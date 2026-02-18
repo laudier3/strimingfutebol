@@ -96,7 +96,7 @@ async function enviarEmailConfirmacaoProdutionCartoa(email: string) {
 /* ===================== MIDDLEWARES ===================== */
 app.use(cors({
   origin: [
-    'http://localhost:3000',
+    'http://localhost:4000',
     'https://futebolaovivooficial.vercel.app',
     'https://www.futebolaovivooficial.vercel.app',
   ],

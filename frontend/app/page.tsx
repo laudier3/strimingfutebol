@@ -35,11 +35,11 @@ export default function LandingPage() {
               Assista aos principais campeonatos com qualidade Full HD, suporte profissional e acesso imediato.
             </p>
 
-           <div className="mt-8 flex gap-4">
-            {/* Botão principal com gradiente verde escuro */}
-            <Button
-              size="lg"
-              className="
+            <div className="mt-8 flex gap-4">
+              {/* Botão principal com gradiente verde escuro */}
+              <Button
+                size="lg"
+                className="
                 text-lg px-8 py-6 
                 bg-gradient-to-r from-green-800 to-green-600 
                 text-white rounded-lg 
@@ -48,37 +48,37 @@ export default function LandingPage() {
                 hover:scale-105 hover:shadow-xl 
                 transition transform duration-300
               "
-              onClick={() => setOpenModal(true)} // opcional
-            >
-              Testar agora
-            </Button>
+                onClick={() => setOpenModal(true)} // opcional
+              >
+                Testar agora
+              </Button>
 
-            {/* Botão outline com efeito hover verde */}
-            <Button
-              size="lg"
-              variant="outline"
-              className="
+              {/* Botão outline com efeito hover verde */}
+              <Button
+                size="lg"
+                variant="outline"
+                className="
                 text-black px-8 py-6 rounded-lg border-2 border-green-800 
                 hover:bg-gradient-to-r hover:from-green-800 hover:to-green-600 
                 hover:text-white hover:scale-105 hover:shadow-lg 
                 transition transform duration-300
               "
-              onClick={() => setOpenModal(true)}
-            >
-              Ver planos
-            </Button>
-          </div>
+                onClick={() => setOpenModal(true)}
+              >
+                Ver planos
+              </Button>
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
           >
-           
-                
-                   <YouTubePlayer url="https://youtu.be/7PolwI7sxp8?t=6" />
-                
-              
+
+
+            <YouTubePlayer url="https://youtu.be/7PolwI7sxp8?t=6" />
+
+
           </motion.div>
         </div>
       </section>
@@ -141,30 +141,29 @@ export default function LandingPage() {
         </h2>
 
         {/* EMAIL */}
-       <div className="max-w-md mx-auto mb-10 bg-neutral-900 border border-green-600/40 rounded-2xl p-6 shadow-lg shadow-green-900/20">
-
-  <h3 className="text-xl font-bold text-white mb-2">
-    🚀 Libere seu acesso agora
+       <div className="max-w-sm mx-auto mb-2 bg-neutral-900 border border-green-600/40 rounded-xl p-4 shadow-md shadow-green-900/20">
+  <h3 className="text-lg font-bold text-white mb-1">
+    🚀 Libere seu acesso
   </h3>
 
-  <p className="text-sm text-neutral-400 mb-4">
-    Informe seu e-mail para continuar para o pagamento seguro.
+  <p className="text-xs text-neutral-400 mb-2">
+    Informe seu e-mail para continuar.
   </p>
 
-  <label 
-    htmlFor="email" 
-    className="block mb-2 text-sm font-semibold text-green-400"
+  <label
+    htmlFor="email"
+    className="block mb-1 text-xs font-semibold text-green-400"
   >
-    Seu melhor e-mail
+    E-mail
   </label>
 
   <input
     id="email"
     type="email"
     placeholder="exemplo@seuemail.com"
-    className={`w-full rounded-xl bg-black border px-4 py-4 text-lg focus:outline-none transition-all
-      ${error 
-        ? 'border-red-500 focus:border-red-500' 
+    className={`w-full rounded-lg bg-black border px-3 py-2 text-sm focus:outline-none transition-all
+      ${error
+        ? 'border-red-500 focus:border-red-500'
         : 'border-green-500 focus:border-green-400'
       }`}
     value={email}
@@ -172,16 +171,17 @@ export default function LandingPage() {
     required
   />
 
-  <p className="mt-3 text-xs text-neutral-500">
-    🔒 Seu e-mail está 100% seguro. Não enviamos spam.
+  <p className="mt-2 text-[10px] text-neutral-500">
+    🔒 Seu e-mail está seguro. Não enviamos spam.
   </p>
 
   {error && (
-    <p className="mt-3 text-sm text-red-500 font-medium">
+    <p className="mt-2 text-xs text-red-500 font-medium">
       {error}
     </p>
   )}
 </div>
+
 
 
         {/* PLANO */}
@@ -205,7 +205,7 @@ export default function LandingPage() {
               Pagar com PIX
             </button>
             {error && (
-            <p className="mt-2 text-sm text-red-500">
+              <p className="mt-2 text-sm text-red-500">
                 {error}
               </p>
             )}
