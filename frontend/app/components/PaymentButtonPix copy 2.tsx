@@ -1,9 +1,6 @@
-'use client'
-
 import { useEffect, useRef, useState } from 'react'
 import { api } from '../services/tripeAPI'
 import { gtag } from '../../lib/gtag'
-
 interface PixPaymentProps {
   email: string
 }
@@ -31,7 +28,7 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
       try {
         const response = await api.post('/create-pix-payment', {
           email,
-          amount: 1, // você pode ajustar o valor
+          amount: 1,
         })
 
         setPixData(response.data)
@@ -51,13 +48,16 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
 
     const interval = setInterval(async () => {
       try {
-        const res = await api.get(`/payment-status?email=${encodeURIComponent(email)}`)
+        const res = await api.get(
+          `/payment-status?email=${encodeURIComponent(email)}`
+        )
+
         if (res.data?.paid && !conversionSent.current) {
           conversionSent.current = true
           setPaid(true)
           clearInterval(interval)
 
-          // ✅ CONVERSÃO GOOGLE ADS
+          // ✅ CONVERSÃO GOOGLE ADS (SEM ERRO TS)
           gtag('event', 'conversion', {
             send_to: 'AW-16702751399/6Yw8CNb90-AbEKeFv5w-',
             transaction_id: `PIX_${email}_${Date.now()}`,
@@ -70,8 +70,8 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
             window.location.href = 'https://apk.futemais.net/app2/'
           }, 800)
         }
-      } catch (err) {
-        console.error('Erro ao verificar PIX:', err)
+      } catch {
+        // erro silencioso
       }
     }, 5000)
 
@@ -85,13 +85,23 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
     setTimeout(() => setCopied(false), 2000)
   }
 
-  if (loading) return <p className="text-center">Gerando QR Code Pix...</p>
-  if (error) return <p className="text-red-500 text-center">{error}</p>
+  if (loading) {
+    return <p className="text-center">Gerando QR Code Pix...</p>
+  }
+
+  if (error) {
+    return <p className="text-red-500 text-center">{error}</p>
+  }
 
   return (
     <div className="fixed inset-0 z-50 bg-neutral-950 flex items-center justify-center px-4">
+
       <div className="w-full max-w-md text-center bg-neutral-900 border border-green-600/40 rounded-2xl p-6 shadow-lg shadow-green-900/20">
-        <h3 className="text-2xl font-bold text-white mb-2">💰 Finalize com PIX</h3>
+
+        <h3 className="text-2xl font-bold text-white mb-2">
+          💰 Finalize com PIX
+        </h3>
+
         <p className="text-sm text-neutral-400 mb-4">
           Escaneie o QR Code abaixo para liberar seu acesso imediatamente.
         </p>
@@ -111,13 +121,20 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
 
         <div className="mt-6 text-sm">
           {paid ? (
-            <p className="text-green-400 font-semibold">✅ Pagamento aprovado! Redirecionando...</p>
+            <p className="text-green-400 font-semibold">
+              ✅ Pagamento aprovado! Redirecionando...
+            </p>
           ) : (
-            <p className="text-yellow-400 animate-pulse">⏳ Aguardando confirmação do pagamento...</p>
+            <p className="text-yellow-400 animate-pulse">
+              ⏳ Aguardando confirmação do pagamento...
+            </p>
           )}
         </div>
 
-        <p className="mt-4 text-xs text-neutral-500">🔒 Pagamento 100% seguro via PIX</p>
+        <p className="mt-4 text-xs text-neutral-500">
+          🔒 Pagamento 100% seguro via PIX
+        </p>
+
       </div>
     </div>
   )
