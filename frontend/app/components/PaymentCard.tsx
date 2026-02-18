@@ -25,7 +25,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
       setLoading(true);
 
       // ✅ CHAMADA PARA SUA API PIX
-      const response = await fetch("https://SEU_BACKEND_URL/create-pix-payment", {
+      const response = await fetch("https://www.futebollaovivo.online//create-pix-payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
