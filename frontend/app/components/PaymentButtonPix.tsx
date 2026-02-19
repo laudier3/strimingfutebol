@@ -31,7 +31,7 @@ export const PixPayment = ({ email }: PixPaymentProps) => {
       try {
         const response = await api.post('/create-pix-payment', {
           email,
-          amount: 1, // você pode ajustar o valor
+          amount: 2000, // você pode ajustar o valor
         })
 
         setPixData(response.data)

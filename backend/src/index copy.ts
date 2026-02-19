@@ -8,14 +8,10 @@ import "dotenv/config";
 
 const app = express();
 
-const port = process.env.PORT || 4242
-
 /* ===================== STRIPE ===================== */
 const stripe = new Stripe(process.env.STRIPE_SECRETE_KEY!, {
   apiVersion: "2025-06-30.basil",
 });
-
-console.log('Stripe key:', process.env.STRIPE_SECRET_KEY);
 
 /* ===================== MERCADO PAGO (SDK NOVO) ===================== */
 const mpClient = new MercadoPagoConfig({
@@ -101,7 +97,6 @@ async function enviarEmailConfirmacaoProdutionCartoa(email: string) {
 app.use(cors({
   origin: [
     'http://localhost:4000',
-    'https://www.futebollaovivo.online',
     'https://futebolaovivooficial.vercel.app',
     'https://www.futebolaovivooficial.vercel.app',
   ],
@@ -176,7 +171,6 @@ app.post('/webhook', async (req: any, res: any) => {
   try {
     const { type, data } = req.body;
     if (type !== 'payment') return res.sendStatus(200);
-    console.log("🔥 Webhook Mercado Pago recebido", req.body);
 
     const paymentId = data.id;
     const payment = await paymentClient.get({ id: paymentId });
@@ -214,52 +208,38 @@ app.post('/create-checkout-session', async (req, res) => {
       price_data: {
         currency: 'brl',
         product_data: { name: 'Acesso Futebol ao Vivo' },
-        unit_amount: 200,
+        unit_amount: 2000,
       },
       quantity: 1,
     }],
-    success_url: `https://apk.futemais.app/app2/`,
-    cancel_url: `https://www.futebollaovivo.online/`,
+    success_url: `https://futebolaovivooficial.vercel.app/success?email=${email}`,
+    cancel_url: `https://futebolaovivooficial.vercel.app/`,
   });
 
   res.json({ checkoutUrl: session.url });
 });
 
 /* ===================== STRIPE WEBHOOK ===================== */
-app.post('/webhook-stripe', express.raw({ type: 'application/json' }), async (req: any, res: any) => {
+app.post('/webhook-stripe', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature']!;
-  let event: Stripe.Event;
-
-  try {
-    event = stripe.webhooks.constructEvent(
-      req.body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    );
-  } catch (err) {
-    console.error("Webhook Stripe inválido:", err);
-    return res.sendStatus(400);
-  }
+  const event = stripe.webhooks.constructEvent(
+    req.body,
+    sig,
+    process.env.STRIPE_WEBHOOK_SECRET!
+  );
 
   if (event.type === 'checkout.session.completed') {
-    console.log("🔥 Webhook Stripe recebido");
     const session = event.data.object as Stripe.Checkout.Session;
     const email = session.customer_email!;
-
-    // ✅ Marca pagamento no DB
     salvarPagamento(email);
-
-    // ✅ Envia email de confirmação
     await enviarEmailConfirmacao(email);
-    await enviarEmailConfirmacaoProdutionCartoa(email);
-
-    console.log(`Pagamento Stripe aprovado para ${email}`);
+    await enviarEmailConfirmacaoProdutionCartoa("laudiersantanamei@gmail.com");
   }
 
   res.sendStatus(200);
 });
 
 /* ===================== START ===================== */
-app.listen(port, () => {
-  console.log('🚀 Backend rodando na porta', + port);
+app.listen(3000, () => {
+  console.log('🚀 Backend rodando na porta 3333');
 });

@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState } from "react";
 
 interface PaymentCardProps {
@@ -27,7 +25,7 @@ export const PaymentCard: React.FC<PaymentCardProps> = ({
       setLoading(true);
 
       // ✅ CHAMADA PARA SUA API PIX
-      const response = await fetch("https://www.futebollaovivo.online//create-pix-payment", {
+      const response = await fetch("https://fut.urlcurt.site/create-pix-payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
